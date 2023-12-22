@@ -15,8 +15,6 @@ runs:
         if grep -Ri "backend \"gcs\"" ./; then
           echo "Backend Configured..."
         else
-          touch failure_summary.txt
-          echo "Err!!!"
           echo "Backend not configured. Please configure using this link: https://github.com/optimizely/experimentation-golden-path/blob/main/golden_path/guides/quickstart_guide.md" > failure_summary.txt
           exit 1
         fi
