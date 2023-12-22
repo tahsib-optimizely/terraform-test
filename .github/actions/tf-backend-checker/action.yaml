@@ -12,9 +12,7 @@ runs:
       id: backend-checker
       shell: bash
       run: |
-        if grep -Ri "backend \"gcs\"" ./; then
-          echo "Backend Configured..."
-        else
+        if ! grep -q -Ri "backend \"gcs\"" ./; then
           echo "Backend not configured. Please configure using this link: https://github.com/optimizely/experimentation-golden-path/blob/main/golden_path/guides/quickstart_guide.md" > failure_summary.txt
           exit 1
         fi
