@@ -1,0 +1,25 @@
+name: 'Terraform Backend Checker'
+description: 'Check existence of tf backend'
+inputs:
+   terraform_directory:
+    description: 'Directory that holds Terraform code'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Check Terraform Backend
+      working-directory: ${{ inputs.terraform_directory }}
+      shell: bash
+      run: |
+        grep -Ri "backend \"gcs\"" ./
+        RC=$?
+        if [ $RC -eq 0 ]; then
+          echo "Backend configured, proceeding with jobs..."
+        else
+          echo "Backend not configured. Exiting pipeline."
+          exit 1
+        fi
+    - name: Test
+      shell: bash
+      run: |
+        echo "Test Ran ......."

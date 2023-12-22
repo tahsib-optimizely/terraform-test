@@ -1,0 +1,12 @@
+name: Main pipeline
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  tf-backend-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/actions/tf-backend-checker/
+        with:
+          terraform_directory: "."
