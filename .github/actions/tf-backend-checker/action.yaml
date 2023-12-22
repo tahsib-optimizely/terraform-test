@@ -20,6 +20,11 @@ runs:
           echo "Backend not configured. Please configure using this link: https://github.com/optimizely/experimentation-golden-path/blob/main/golden_path/guides/quickstart_guide.md" > failure_summary.txt
           exit 1
         fi
+    
+    - name: test
+      shell: bash
+      run: |
+        exit 1
 
     - name: Display Failure Summary
       shell: bash
