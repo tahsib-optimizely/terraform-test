@@ -18,7 +18,7 @@ runs:
           echo "Backend configured, proceeding with jobs..."
         else
           CONF_BACKEND="Backend not configured. Please configure the [backend](https://github.com/optimizely/experimentation-golden-path/blob/main/golden_path/guides/quickstart_guide.md)"
-          echo "summary<<${CONF_BACKEND}" >> $GITHUB_OUTPUT
+          echo "::set-output name=summary::$CONF_BACKEND"
         fi
     - name: Test
       shell: bash
