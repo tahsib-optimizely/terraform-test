@@ -9,24 +9,26 @@ runs:
   steps:
     - name: Check Terraform Backend
       working-directory: ${{ inputs.terraform_directory }}
+      id: backend-checker
       shell: bash
       run: |
         grep -Ri "backend \"gcs\"" ./
         RC=$?
         if [ $RC -eq 0 ]; then
-          echo "Backend configured, proceeding with jobs..." >> $GITHUB_STEP_SUMMARY
+          echo "Backend configured, proceeding with jobs..."
         else
           CONF_BACKEND="Backend not configured. Please configure the [backend](https://github.com/optimizely/experimentation-golden-path/blob/main/golden_path/guides/quickstart_guide.md)"
-
-          echo "$CONF_BACKEND" >> $GITHUB_STEP_SUMMARY
+          echo "$CONF_BACKEND" >> $summary
         fi
     - name: Test
       shell: bash
       run: |
         echo "Test Ran ......."
+    
     - name: Display Summary
-      if: always() # Ensures this step runs regardless of previous steps' success or failure
+      if: failure() # Ensures this step runs regardless of previous steps' success or failure
       shell: bash
+      env:
+        SUMMARY: ${{ steps.backend-checker.outputs.summary }}
       run: |
-        echo "Step summary:"
-        cat $GITHUB_STEP_SUMMARY
+        echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
