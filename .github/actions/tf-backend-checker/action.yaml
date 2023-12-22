@@ -13,7 +13,7 @@ runs:
       shell: bash
       run: |
         if ! grep -q -Ri "backend \"gcs\"" ./; then
-          echo "Backend not configured. Please configure using this [link](https://github.com/optimizely/experimentation-golden-path/blob/main/golden_path/guides/quickstart_guide.md)" > failure_summary.txt
+          echo "Backend not configured. Please configure using this [link](https://github.com/optimizely/experimentation-golden-path/blob/main/golden_path/guides/quickstart_guide.md)" > failure_summary
           exit 1
         fi
     
@@ -26,4 +26,4 @@ runs:
       shell: bash
       if: ${{ failure() && steps.backend-checker.outcome == 'failure' }}
       run: |
-        cat failure_summary.txt >> $GITHUB_STEP_SUMMARY
+        cat failure_summary >> $GITHUB_STEP_SUMMARY
