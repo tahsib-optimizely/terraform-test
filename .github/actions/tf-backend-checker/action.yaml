@@ -24,3 +24,9 @@ runs:
       shell: bash
       run: |
         echo "Test Ran ......."
+    - name: Display Summary
+      if: always() # Ensures this step runs regardless of previous steps' success or failure
+      shell: bash
+      run: |
+        echo "Step summary:"
+        cat $GITHUB_STEP_SUMMARY
