@@ -9,20 +9,16 @@ runs:
   steps:
     - name: Check Terraform Backend
       working-directory: ${{ inputs.terraform_directory }}
-      id: backend_check
       shell: bash
       run: |
         grep -Ri "backend \"gcs\"" ./
         RC=$?
         if [ $RC -eq 0 ]; then
           echo "Backend configured, proceeding with jobs..."
-          echo "::set-output name=backend_configured::true"
         else
-          echo "Backend not configured. Exiting pipeline."
-          echo "::set-output name=backend_configured::false"
+          echo "Backend not configured. Please configure the [backend](https://github.com/optimizely/experimentation-golden-path/blob/main/golden_path/guides/quickstart_guide.md )" >> $GITHUB_OUTPUT
         fi
     - name: Test
       shell: bash
-      if: steps.backend_check.outputs.backend_configured == 'true'
       run: |
         echo "Test Ran ......."
