@@ -17,5 +17,5 @@ runs:
         if [ $RC -eq 0 ]; then
           echo "Backend configured, proceeding with jobs..."
         else
-          echo "Backend not configured. Please configure using this link: https://github.com/optimizely/experimentation-golden-path/blob/main/golden_path/guides/quickstart_guide.md)"
+          echo "Backend not configured. Please configure using this link: https://github.com/optimizely/experimentation-golden-path/blob/main/golden_path/guides/quickstart_guide.md"
         fi
