@@ -17,7 +17,7 @@ runs:
         if [ $RC -eq 0 ]; then
           echo "Backend configured, proceeding with jobs..."
         else
-          CONF_BACKEND="Backend not configured. Please configure the [backend](https://github.com/optimizely/experimentation-golden-path/blob/main/golden_path/guides/quickstart_guide.md)"
+          CONF_BACKEND="Backend not configured. Please configure using this link: https://github.com/optimizely/experimentation-golden-path/blob/main/golden_path/guides/quickstart_guide.md)"
           echo "::set-output name=backend_summary::$CONF_BACKEND"
         fi
     - name: Test
@@ -31,4 +31,5 @@ runs:
       env:
         SUMMARY: ${{ steps.backend-checker.outputs.backend_summary }}
       run: |
+        echo $SUMMARY
         echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
