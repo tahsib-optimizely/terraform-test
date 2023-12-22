@@ -23,6 +23,6 @@ runs:
 
     - name: Display Failure Summary
       shell: bash
-      if: ${{ always() && failure() && steps.backend-checker.outcome == 'failure' }}
+      if: ${{ failure() && steps.backend-checker.outcome == 'failure' }}
       run: |
         cat failure_summary.txt >> $GITHUB_STEP_SUMMARY
