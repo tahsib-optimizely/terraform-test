@@ -9,6 +9,7 @@ runs:
   steps:
     - name: Check Terraform Backend
       working-directory: ${{ inputs.terraform_directory }}
+      id: backend_check
       shell: bash
       run: |
         grep -Ri "backend \"gcs\"" ./
