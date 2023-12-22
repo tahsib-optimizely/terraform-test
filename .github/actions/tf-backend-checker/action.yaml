@@ -14,7 +14,7 @@ runs:
       run: |
         grep -Ri "backend \"gcs\"" ./
         if [ "$?" -ne 0 ]; then
-          echo "Backend not configured. Please configure using this link: https://github.com/optimizely/experimentation-golden-path/blob/main/golden_path/guides/quickstart_guide.md" >> failure_summary.txt
+          echo "Backend not configured. Please configure using this link: https://github.com/optimizely/experimentation-golden-path/blob/main/golden_path/guides/quickstart_guide.md" > failure_summary.txt
         fi
 
     - name: Display Failure Summary
