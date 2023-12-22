@@ -7,6 +7,7 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - uses: actions/checkout@v3
     - name: Check Terraform Backend
       working-directory: ${{ inputs.terraform_directory }}
       shell: bash
