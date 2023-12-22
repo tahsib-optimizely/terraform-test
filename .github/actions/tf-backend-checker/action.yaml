@@ -18,7 +18,7 @@ runs:
           echo "Backend configured, proceeding with jobs..."
         else
           CONF_BACKEND="Backend not configured. Please configure the [backend](https://github.com/optimizely/experimentation-golden-path/blob/main/golden_path/guides/quickstart_guide.md)"
-          echo "::set-output name=summary::$CONF_BACKEND"
+          echo "::set-output name=backend_summary::$CONF_BACKEND"
         fi
     - name: Test
       shell: bash
@@ -29,6 +29,6 @@ runs:
       if: failure() # Ensures this step runs regardless of previous steps' success or failure
       shell: bash
       env:
-        SUMMARY: ${{ steps.backend-checker.outputs.summary }}
+        SUMMARY: ${{ steps.backend-checker.outputs.backend_summary }}
       run: |
         echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
